@@ -20,6 +20,11 @@ public class GameManager : SingletonGeneric<GameManager>
     {
         
     }
+
+    public void ShowWheel()
+    {
+        WheelsManager.Instance.ShowWheel(_currentWheelIndex);
+    }
 }
 
 public enum GameState

@@ -5,12 +5,52 @@ using UnityEngine;
 public class WheelsManager : SingletonGeneric<WheelsManager>
 {
     [SerializeField] private GameObject wheelPrefab;
+    
+    [SerializeField] private List<RewardDataGroup> bronzeRewards;
+    [SerializeField] private List<RewardDataGroup> silverRewards;
+    [SerializeField] private List<RewardDataGroup> goldRewards;
+
+    [SerializeField][Range(0,1f)] private float progressMultiplier;
 
     private List<GameObject> _visibleWheels = new List<GameObject>();
 
-    public void CreateAndShowWheel(WheelType wheelType, List<RewardData> rewardDatas)
+
+    public void ShowWheel(int currentWheelIndex)
+    {
+        var wheelType = GetWheelTypeForIndex(currentWheelIndex);
+        List<RewardDataGroup> wheelRewardPool = new List<RewardDataGroup>(); 
+        switch (wheelType)
+        {
+            case WheelType.Bronze:
+                wheelRewardPool = bronzeRewards;
+                break;
+            case WheelType.Silver:
+                wheelRewardPool = silverRewards;
+                break;
+            case WheelType.Gold:
+                wheelRewardPool = goldRewards;
+                break;
+        }
+        RewardDataGroup rewardDatas = wheelRewardPool[Random.Range(0, wheelRewardPool.Count)];
+        CreateAndShowWheel(wheelType, rewardDatas.RewardList, currentWheelIndex * progressMultiplier);
+    }
+    
+    private void CreateAndShowWheel(WheelType wheelType, List<RewardData> rewardDatas, float rewardMultiplier)
     {
         GameObject wheel = Instantiate(wheelPrefab);
-        wheel.GetComponent<WheelController>().Initialize(wheelType, rewardDatas);
+        wheel.GetComponent<WheelController>().Initialize(wheelType, rewardDatas, rewardMultiplier);
+    }
+
+    private WheelType GetWheelTypeForIndex(int currentWheelIndex)
+    {
+        if ((currentWheelIndex + 1) % 30 == 0)//gold wheel
+        {
+            return WheelType.Gold;
+        }
+        if ((currentWheelIndex + 1) % 5 == 0)//silver wheel
+        {
+            return WheelType.Silver;
+        }
+        return WheelType.Bronze;
     }
 }

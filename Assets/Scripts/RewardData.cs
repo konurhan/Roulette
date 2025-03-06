@@ -14,9 +14,24 @@ public class RewardData
     public ChestType chestType = ChestType.None;
     public int skinId = -1;
     public Sprite sprite;
-    
+
+    // Copy constructor
+    public RewardData(RewardData other)
+    {
+        if (other == null) return;
+
+        this.probability = other.probability;
+        this.amount = other.amount;
+        this.rewardType = other.rewardType;
+        this.currencyType = other.currencyType;
+        this.equipmentPointType = other.equipmentPointType;
+        this.chestType = other.chestType;
+        this.skinId = other.skinId;
+        this.sprite = other.sprite; // Note: Sprites are reference types
+    }
+
+#if UNITY_EDITOR
     [NonSerialized] private RewardType previousRewardType; // Track last rewardType
-    
     public void OnRewardTypeUpdated()
     {
         if (rewardType != previousRewardType)
@@ -57,7 +72,9 @@ public class RewardData
             previousRewardType = rewardType;
         }
         
-    }}
+    }
+#endif
+}
 
 
 
