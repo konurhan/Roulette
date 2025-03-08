@@ -17,6 +17,7 @@ public class RewardManager : SingletonGeneric<RewardManager>
             if (pair.Key.IsSameType(rewardData))
             {
                 existingItem = pair.Key;
+                break;
             }
         }
 

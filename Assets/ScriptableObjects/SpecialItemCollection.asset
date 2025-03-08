@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47880107a9b62774799ff6ebe4884da8, type: 3}
+  m_Name: SpecialItemCollection
+  m_EditorClassIdentifier: 
+  SpecialItems:
+  - Id: 0
+    Name: EasterGlasses
+    Icon: {fileID: 21300000, guid: dfa841662fdc205468ff8106eb9d1013, type: 3}
+  - Id: 1
+    Name: EasterCap
+    Icon: {fileID: 21300000, guid: 93ac2bb8a5b92ed449d6b70ce8b00a98, type: 3}
+  - Id: 2
+    Name: PumpkinHelmet
+    Icon: {fileID: 21300000, guid: e3971a92985bcb748ac03ec9703e4c3d, type: 3}
+  - Id: 3
+    Name: BayenetEaster
+    Icon: {fileID: 21300000, guid: c211434290b319e46a1e231cd967a52f, type: 3}
+  - Id: 4
+    Name: BayonetSummer
+    Icon: {fileID: 21300000, guid: 6accc0bf654642d40a7897ab88e173bf, type: 3}
+  - Id: 5
+    Name: GrenadeM26
+    Icon: {fileID: 21300000, guid: 53e68b82685639243aa280970ea1b55b, type: 3}
+  - Id: 6
+    Name: GrenadeM67
+    Icon: {fileID: 21300000, guid: 6c76d93db6a54a045979b613c0b51999, type: 3}
+  - Id: 7
+    Name: HealtShotRed
+    Icon: {fileID: 21300000, guid: 0c461f8f8deedfc488faf3bf2dada5e2, type: 3}
+  - Id: 8
+    Name: HealtShotGreen
+    Icon: {fileID: 21300000, guid: 924e73e241ac0db4b8a5ca9b16b4582d, type: 3}
+  - Id: 9
+    Name: Molotov
+    Icon: {fileID: 21300000, guid: aa2b85fc8b5b84143962c54cde4ab90a, type: 3}
+  - Id: 10
+    Name: ShotgunSkin
+    Icon: {fileID: 21300000, guid: 64aea3a0ecd480d44ab342505f496fb3, type: 3}
+  - Id: 11
+    Name: KnifeSkin
+    Icon: {fileID: 21300000, guid: 3fdffb3368473d247a77e1a03fc14c71, type: 3}
+  - Id: 12
+    Name: RifleSkin
+    Icon: {fileID: 21300000, guid: ae9557ce58365494ea2d10428069a21e, type: 3}
+  - Id: 13
+    Name: ShotgunSkin2
+    Icon: {fileID: 21300000, guid: d100e40fcca03ff43bd0f841688ffa47, type: 3}
+  - Id: 14
+    Name: SMGSkin
+    Icon: {fileID: 21300000, guid: 6eac9f15e9d064549b1ec3d593752aec, type: 3}
+  - Id: 15
+    Name: SniperSkin
+    Icon: {fileID: 21300000, guid: b4bcfa429839ff44a89acd9fc33c6486, type: 3}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RewardFactory : SingletonGeneric<RewardFactory>
@@ -19,8 +20,8 @@ public class RewardFactory : SingletonGeneric<RewardFactory>
             case RewardType.Chest:
                 rewardItem = new ChestRewardItem(rewardData.amount, rewardData.chestType);
                 break;
-            case RewardType.Skin:
-                rewardItem = new SkinRewardItem(rewardData.amount, rewardData.skinId);
+            case RewardType.Special:
+                rewardItem = new SpecialRewardItem(rewardData.amount, rewardData.specialItemID);
                 break;
         }
         
@@ -28,5 +29,16 @@ public class RewardFactory : SingletonGeneric<RewardFactory>
         RewardItemView rewardItemView = rewardItemViewGo.GetComponent<RewardItemView>();
         rewardItemView.Initalize(rewardData);
         return new Tuple<RewardItem, RewardItemView>(rewardItem, rewardItemView);
+    }
+
+    public List<RewardData> GetRewardDataListFromSO(RewardDataGroup rewardDataGroup)
+    {
+        List<RewardData> rewardDataList = new List<RewardData>();
+        foreach (var rewardDataSo in rewardDataGroup.RewardList)
+        {
+            RewardData rewardData = new RewardData(rewardDataSo);
+            rewardDataList.Add(rewardData);
+        }
+        return rewardDataList;
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RewardDataGroup", menuName = "ScriptableObjects/RewardDataGroup", order = 1)]
 public class RewardDataGroup : ScriptableObject
 {
-    public List<RewardData> RewardList;
+    public SpecialItemCollection specialItemCollection;
+    public List<RewardDataSO> RewardList;
     
     private void OnValidate()
     {
@@ -14,6 +15,7 @@ public class RewardDataGroup : ScriptableObject
             foreach (var reward in RewardList)
             {
                 reward.OnRewardTypeUpdated();
+                reward.OnSpecialItemIdUpdated(specialItemCollection);
             }
         }
     }

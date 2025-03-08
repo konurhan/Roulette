@@ -71,18 +71,18 @@ public class ChestRewardItem : RewardItem
     }
 }
 
-public class SkinRewardItem : RewardItem
+public class SpecialRewardItem : RewardItem
 {
-    private int _skinID {get;}
+    private int _specialItemID {get;}
     
-    public SkinRewardItem(int amount, int skinID) : base(RewardType.Chest, amount)
+    public SpecialRewardItem(int amount, int specialItemID) : base(RewardType.Chest, amount)
     {
-        _skinID = skinID;
+        _specialItemID = specialItemID;
     }
 
     public override bool IsSameType(RewardData rewardData)
     {
-        return rewardData.skinId != -1 && rewardData.skinId == this._skinID;
+        return rewardData.specialItemID != -1 && rewardData.specialItemID == this._specialItemID;
     }
 }
 
@@ -92,7 +92,7 @@ public enum RewardType
     Currency,
     EquipmentPoint,
     Chest,
-    Skin
+    Special
 }
 
 public enum CurrencyType

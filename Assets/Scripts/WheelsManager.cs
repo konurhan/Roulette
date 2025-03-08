@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class WheelsManager : SingletonGeneric<WheelsManager>
 {
+    [SerializeField] private Transform wheelParent;
     [SerializeField] private GameObject wheelPrefab;
     
     [SerializeField] private List<RewardDataGroup> bronzeRewards;
     [SerializeField] private List<RewardDataGroup> silverRewards;
     [SerializeField] private List<RewardDataGroup> goldRewards;
 
-    [SerializeField][Range(0,1f)] private float progressMultiplier;
+    [SerializeField][Range(1,2f)] private float progressMultiplier;
 
     private List<GameObject> _visibleWheels = new List<GameObject>();
 
@@ -32,13 +33,15 @@ public class WheelsManager : SingletonGeneric<WheelsManager>
                 break;
         }
         RewardDataGroup rewardDatas = wheelRewardPool[Random.Range(0, wheelRewardPool.Count)];
-        CreateAndShowWheel(wheelType, rewardDatas.RewardList, currentWheelIndex * progressMultiplier);
+        List<RewardData> rewardDataList = RewardFactory.Instance.GetRewardDataListFromSO(rewardDatas);
+        CreateAndShowWheel(wheelType, rewardDataList, (currentWheelIndex + 1) * progressMultiplier);
     }
     
     private void CreateAndShowWheel(WheelType wheelType, List<RewardData> rewardDatas, float rewardMultiplier)
     {
-        GameObject wheel = Instantiate(wheelPrefab);
+        GameObject wheel = Instantiate(wheelPrefab, wheelParent);
         wheel.GetComponent<WheelController>().Initialize(wheelType, rewardDatas, rewardMultiplier);
+        _visibleWheels.Add(wheel);
     }
 
     private WheelType GetWheelTypeForIndex(int currentWheelIndex)
@@ -52,5 +55,14 @@ public class WheelsManager : SingletonGeneric<WheelsManager>
             return WheelType.Silver;
         }
         return WheelType.Bronze;
+    }
+
+    public void ClearWheels()
+    {
+        foreach (var wheel in _visibleWheels)
+        {
+            Destroy(wheel);
+        }
+        _visibleWheels.Clear();
     }
 }

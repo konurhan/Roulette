@@ -16,7 +16,18 @@ public class WheelSlot : MonoBehaviour
     {
         _rewardData = rewardData;
         _isBomb = isBomb;
+        //TODO: if bomb set bomb sprite
         rewardImage.sprite = rewardData.sprite;
         rewardAmountText.text = rewardData.amount.ToString();
+    }
+
+    public float GetProbability()
+    {
+        return _rewardData.probability;
+    }
+
+    public RewardData GetRewardData()
+    {
+        return _rewardData;
     }
 }
