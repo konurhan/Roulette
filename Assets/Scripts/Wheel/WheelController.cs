@@ -16,17 +16,28 @@ public class WheelController : MonoBehaviour
     [SerializeField] private List<WheelSlot> wheelSlots;
     
     [SerializeField] private AnimationCurve wheelAnimationCurve;
+
+    [SerializeField] private float idleRotationSpeed = 50f;
+    
+    [SerializeField] private Sprite bombSprite;
+    
+    [SerializeField] private Animator _spinButtonAnimator;
     
     private WheelType _wheelType;
     private bool _hasBomb;
-
-
-    public void Initialize(WheelType wheelType, List<RewardData> rewards, float rewardMultiplier)
+    
+    public void Initialize(WheelType wheelType, List<RewardData> rewards, float rewardMultiplier)//set wheel sprite by type
     {
         if (rewards.Count != wheelSlots.Count)
         {
             Debug.LogError("Reward count - slot count mismatch");
         }
+        
+        spinButton.gameObject.SetActive(false);
+        spinButton.gameObject.GetComponent<SpinButtonAnimationEventListener>().Initialize(this);
+        
+        wheelImage.sprite = WheelsManager.Instance.GetWheelSprite(wheelType);
+        indicatorImage.sprite = WheelsManager.Instance.GetIndicatorSprite(wheelType);
 
         if (wheelType == WheelType.Bronze)
         {
@@ -46,10 +57,19 @@ public class WheelController : MonoBehaviour
         for (int i = 0; i < wheelSlots.Count; i++)
         {
             rewards[i].amount = (int)(rewards[i].amount * rewardMultiplier);
-            wheelSlots[i].Initialize(rewards[i], _hasBomb && i == bombIndex);
+            wheelSlots[i].Initialize(rewards[i], _hasBomb && i == bombIndex, this);
         }
-        
+    }
+
+    public void OnReachedActivePosition()
+    {
+        ShowSpinButton();
         spinButton.onClick.AddListener(OnSpinButtonClicked);
+        //wheel idle rotation
+        wheelBody.transform.DOLocalRotate(Vector3.forward * idleRotationSpeed, 1f, RotateMode.FastBeyond360)
+            .SetRelative()
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Incremental);
     }
 
     private void OnSpinButtonClicked()
@@ -67,13 +87,22 @@ public class WheelController : MonoBehaviour
             }
         }
         RotateToChosenSlot(chosenSlot, () => GiveChosenSlotReward(chosenSlot));
+        HideSpinButton();
     }
 
     private void GiveChosenSlotReward(WheelSlot chosenSlot)
     {
         //TODO: bunu başka yere taşıyabilir miyiz, direkt slot rewardData referansı üzerinden vermek doğru mu, controller'ın üzerinde tutma da düşünülebilir
-        var slotReward = chosenSlot.GetRewardData();
-        RewardManager.Instance.GiveReward(slotReward);
+        if (chosenSlot.IsBomb)
+        {
+            GameplayManager.Instance.SetLost();
+        }
+        else
+        {
+            var slotReward = chosenSlot.GetRewardData();
+            RewardManager.Instance.GiveReward(slotReward);
+            GameplayManager.Instance.HideWheel();
+        }
     }
     
     public void RotateToChosenSlot(WheelSlot wheelSlot, Action giveRewardAction)//move indicator
@@ -96,11 +125,43 @@ public class WheelController : MonoBehaviour
         Vector3 targetRotation = new Vector3(wheelBody.localRotation.eulerAngles.x, 
                                             wheelBody.localRotation.eulerAngles.y, 
                                             wheelBodyCurrentZRotation + totalZRotationDistance);
-        
+        wheelBody.transform.DOKill();
         wheelBody.transform.DOLocalRotate(targetRotation, 4f, RotateMode.FastBeyond360)
             .SetEase(wheelAnimationCurve)
             .onComplete += () => { giveRewardAction(); };
     }
+
+    public Sprite GetBombSprite()
+    {
+        return bombSprite;
+    }
+
+    private void ShowSpinButton()
+    {
+        spinButton.gameObject.SetActive(true);
+        spinButton.interactable = false;
+        _spinButtonAnimator.Play("SpinButtonBorn");
+    }
+
+    private void HideSpinButton()
+    {
+        spinButton.interactable = false;
+        _spinButtonAnimator.Play("SpinButtonDisappear");
+    }
+    
+    #region AnimationEvents
+
+    public void SpinBornAnimComplete()
+    {
+        spinButton.interactable = true;
+    }
+    
+    public void SpinDisappearAnimComplete()
+    {
+        spinButton.gameObject.SetActive(false);
+    }
+
+    #endregion
 }
 
 

@@ -32,7 +32,7 @@ public class SingletonGeneric<T> : MonoBehaviour where T : Component
             GameObject gameObj = new GameObject();
             gameObj.name = typeof(T).Name;
             instance = gameObj.AddComponent<T>();
-            DontDestroyOnLoad(gameObj);
+            //DontDestroyOnLoad(gameObj);
         }
     }
     private void RemoveDuplicates()
@@ -40,7 +40,7 @@ public class SingletonGeneric<T> : MonoBehaviour where T : Component
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {

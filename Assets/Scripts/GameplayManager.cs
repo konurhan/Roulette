@@ -5,8 +5,28 @@ using UnityEngine;
 
 public class GameplayManager : SingletonGeneric<GameplayManager>
 {
+    private GameState gameState;
     private int _currentWheelIndex = 0;
 
+    private void Start()
+    {
+        SetState(GameState.Idle);
+        ShowWheel();
+    }
+
+    public void SetState(GameState state)
+    {
+        this.gameState = state;
+        if (state == GameState.Idle)
+        {
+            UIManager.Instance.SetButtonsActive(true);
+        }
+        else
+        {
+            UIManager.Instance.SetButtonsActive(false);
+        }
+    }
+    
     public int GetCurrentWheelIndex()
     {
         return _currentWheelIndex;
@@ -24,7 +44,36 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
 
     public void ShowWheel()
     {
+        SetState(GameState.Moving);
         WheelsManager.Instance.ShowWheel(_currentWheelIndex);
+    }
+
+    public void HideWheel()
+    {
+        SetState(GameState.Moving);
+        WheelsManager.Instance.HideWheel(_currentWheelIndex);
+        NextWheel();
+        ShowWheel();
+    }
+
+    public void SetLost()
+    {
+        SetState(GameState.GameOver);
+        UIManager.Instance.ShowFailPopup();
+    }
+
+    public void Revive()
+    {
+        
+    }
+
+    public void Restart()
+    {
+        SetState(GameState.Idle);
+        ResetProgress();
+        WheelsManager.Instance.ClearWheels();
+        RewardManager.Instance.ResetRewards();
+        ShowWheel();
     }
 
 #if UNITY_EDITOR
@@ -35,6 +84,10 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
             WheelsManager.Instance.ClearWheels();
             ShowWheel();
         }
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            SetLost();
+        }
     }
 #endif
 }
@@ -42,6 +95,7 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
 public enum GameState
 {
     Idle,
+    Moving,
     Spinning,
     GameOver,
 }

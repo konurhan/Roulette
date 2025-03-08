@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RewardManager : SingletonGeneric<RewardManager>
@@ -33,6 +34,15 @@ public class RewardManager : SingletonGeneric<RewardManager>
             var rewardItemView = newItemTuple.Item2;
             _activeRewardItems[rewardItem] = rewardItemView;
             rewardItemView.transform.SetParent(rewardViewsParent);
+        }
+    }
+
+    public void ResetRewards()
+    {
+        foreach (var pair in _activeRewardItems.ToList())
+        {
+            Destroy(pair.Value.gameObject);
+            _activeRewardItems.Remove(pair.Key);
         }
     }
 }

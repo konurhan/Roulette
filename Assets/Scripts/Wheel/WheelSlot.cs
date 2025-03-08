@@ -11,14 +11,27 @@ public class WheelSlot : MonoBehaviour
     
     private RewardData _rewardData;
     private bool _isBomb;
+    private WheelController _wheelController;
 
-    public void Initialize(RewardData rewardData, bool isBomb)
+    public bool IsBomb => _isBomb;
+
+    public void Initialize(RewardData rewardData, bool isBomb, WheelController wheelController)
     {
+        _wheelController = wheelController;
         _rewardData = rewardData;
         _isBomb = isBomb;
         //TODO: if bomb set bomb sprite
-        rewardImage.sprite = rewardData.sprite;
-        rewardAmountText.text = rewardData.amount.ToString();
+        if (!isBomb)
+        {
+            rewardImage.sprite = rewardData.sprite;
+            rewardAmountText.text = rewardData.amount.ToString();
+        }
+        else
+        {
+            rewardImage.sprite = _wheelController.GetBombSprite();
+            rewardAmountText.gameObject.SetActive(false);
+        }
+        
     }
 
     public float GetProbability()
