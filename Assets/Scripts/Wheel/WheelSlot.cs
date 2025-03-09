@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,7 +26,15 @@ public class WheelSlot : MonoBehaviour
         if (!isBomb)
         {
             rewardImage.sprite = rewardData.sprite;
-            rewardAmountText.text = rewardData.amount.ToString();
+            if (rewardData.amount > 1000)
+            {
+                rewardAmountText.text = "x" + (float)Math.Round(rewardData.amount / 1000f, 2) + "K";
+            }
+            else
+            {
+                rewardAmountText.text = "x" + rewardData.amount.ToString();
+            }
+            
         }
         else
         {

@@ -51,7 +51,7 @@ public class RewardItemView : MonoBehaviour
     private void PlayImageIncreaseTween()
     {
         _rewardImage.DOKill();
-        _rewardImage.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f).SetLoops(6 ,LoopType.Yoyo);
+        _rewardImage.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.1f).SetLoops(2 ,LoopType.Yoyo);
     }
     
     private void PlayTextIncreaseTween()
@@ -67,18 +67,25 @@ public class RewardItemView : MonoBehaviour
     {
         int start = _rewardAmountText.text != null ? int.Parse(_rewardAmountText.text) : 0;
         if (start >= target) yield break;
+
+        var wait = new WaitForSeconds(0.1f);
         
         _textIncreasing = true;
         _rewardAmountText.transform.DOKill();
         _rewardAmountText.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.3f).SetLoops(-1 ,LoopType.Yoyo);
+
+        int stepLength = Mathf.CeilToInt((target - start) / 20f);//2 sec
         
-        for (int i = start + 1; i < target + 1; i++)
+        for (int i = start + 1; i < target + 1; i += stepLength)
         {
+            if (i > target) break;
             _rewardAmountText.text = i.ToString();
-            yield return null;
+            yield return wait;
         }
+        _rewardAmountText.text = target.ToString();
         
         _rewardAmountText.transform.DOKill();
+        _rewardAmountText.transform.localScale = Vector3.one;
         _textIncreasing = false;
     }
     

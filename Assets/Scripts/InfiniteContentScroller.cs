@@ -29,6 +29,8 @@ public class InfiniteContentScroller : MonoBehaviour
 
     public void Initialize(List<BaseScrollableContentData> scrollableContentDataList)
     {
+        contentItemStartIndex = 0;
+        
         foreach (var contentView in _contentViewList.ToList())
         {
             _contentViewList.Remove(contentView);
@@ -59,7 +61,7 @@ public class InfiniteContentScroller : MonoBehaviour
 
     public void MoveToTheNextItem()
     {
-        float distance = _contentViewList[0].rect.width + contentLayoutGroup.spacing + 0.1f;
+        float distance = _contentViewList[0].rect.width + contentLayoutGroup.spacing;
         _isContentMoving = true;
         content.DOAnchorPosX(content.anchoredPosition.x - distance, scrollSpeed).OnComplete(()=>_isContentMoving=false);
     }
