@@ -126,7 +126,7 @@ public class WheelsManager : SingletonGeneric<WheelsManager>
         };;
     }
 
-    private WheelType GetWheelTypeForIndex(int currentWheelIndex)
+    public WheelType GetWheelTypeForIndex(int currentWheelIndex)
     {
         if ((currentWheelIndex + 1) % 30 == 0)//gold wheel
         {

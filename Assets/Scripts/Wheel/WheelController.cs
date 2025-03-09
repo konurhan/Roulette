@@ -95,7 +95,15 @@ public class WheelController : MonoBehaviour
         //TODO: bunu başka yere taşıyabilir miyiz, direkt slot rewardData referansı üzerinden vermek doğru mu, controller'ın üzerinde tutma da düşünülebilir
         if (chosenSlot.IsBomb)
         {
-            GameplayManager.Instance.SetLost();
+            if (GameplayManager.Instance.IsBombsEnabled)
+            {
+                GameplayManager.Instance.SetLost();
+            }
+            else
+            {
+                GameplayManager.Instance.HideWheel();
+            }
+            
         }
         else
         {

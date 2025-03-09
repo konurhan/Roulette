@@ -8,9 +8,15 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
     private GameState gameState;
     private int _currentWheelIndex = 0;
 
+    [SerializeField] private int maxWheelCount = 200;
+    [SerializeField] private bool isBombsEnabled = true;
+
+    public bool IsBombsEnabled => isBombsEnabled;
+    public int MAX_WHEEL_COUNT => maxWheelCount;
     private void Start()
     {
         SetState(GameState.Idle);
+        UIManager.Instance.InitializeLevelProgressScroll();
         ShowWheel();
     }
 
@@ -52,6 +58,7 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
     {
         SetState(GameState.Moving);
         WheelsManager.Instance.HideWheel(_currentWheelIndex);
+        UIManager.Instance.MoveLevelProgressScroll(_currentWheelIndex);
         NextWheel();
         ShowWheel();
     }
@@ -71,6 +78,7 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
     {
         SetState(GameState.Idle);
         ResetProgress();
+        UIManager.Instance.InitializeLevelProgressScroll();
         WheelsManager.Instance.ClearWheels();
         RewardManager.Instance.ResetRewards();
         ShowWheel();
@@ -87,6 +95,18 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
         else if (Input.GetKeyDown(KeyCode.F))
         {
             SetLost();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Time.timeScale /= 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Time.timeScale *= 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Time.timeScale = 1;
         }
     }
 #endif
