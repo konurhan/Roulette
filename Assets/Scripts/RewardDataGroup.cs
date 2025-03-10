@@ -8,6 +8,7 @@ public class RewardDataGroup : ScriptableObject
     public SpecialItemCollection specialItemCollection;
     public List<RewardDataSO> RewardList;
     
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (RewardList != null)
@@ -19,4 +20,5 @@ public class RewardDataGroup : ScriptableObject
             }
         }
     }
+#endif
 }
