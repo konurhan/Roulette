@@ -15,6 +15,8 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
     public int MAX_WHEEL_COUNT => maxWheelCount;
     private void Start()
     {
+        Application.targetFrameRate = 60;
+        
         SetState(GameState.Idle);
         UIManager.Instance.InitializeLevelProgressScroll();
         ShowWheel();
