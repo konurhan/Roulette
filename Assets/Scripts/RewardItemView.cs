@@ -25,6 +25,8 @@ public class RewardItemView : MonoBehaviour
 
     public void Initalize(RewardData rewardData)
     {
+        transform.localScale = Vector3.one;
+        
         _rewardImage.sprite = rewardData.sprite;
         _rewardAmountText.text = "0";
         _currentRewardAmount = rewardData.amount;
