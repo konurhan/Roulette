@@ -13,6 +13,8 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
 
     public bool IsBombsEnabled => isBombsEnabled;
     public int MAX_WHEEL_COUNT => maxWheelCount;
+
+    public bool IsStarted = false;
     private void Start()
     {
         Application.targetFrameRate = 60;
@@ -20,6 +22,7 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
         SetState(GameState.Idle);
         UIManager.Instance.InitializeLevelProgressScroll();
         ShowWheel();
+        IsStarted = true;
     }
 
     public void SetState(GameState state)
@@ -86,6 +89,11 @@ public class GameplayManager : SingletonGeneric<GameplayManager>
         ShowWheel();
     }
 
+    public void SetBombsEnabled(bool enabled)
+    {
+        isBombsEnabled = enabled;
+    }
+    
 #if UNITY_EDITOR
     private void Update()
     {
