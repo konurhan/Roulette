@@ -2493,9 +2493,9 @@ MonoBehaviour:
   bronzeRewards:
   - {fileID: 11400000, guid: 461312d0647231f4ba59e6fe1224e3d1, type: 2}
   silverRewards:
-  - {fileID: 11400000, guid: 461312d0647231f4ba59e6fe1224e3d1, type: 2}
+  - {fileID: 11400000, guid: ecbfe2ee3f260de46a66f94a9e480762, type: 2}
   goldRewards:
-  - {fileID: 11400000, guid: 461312d0647231f4ba59e6fe1224e3d1, type: 2}
+  - {fileID: 11400000, guid: ad11b0019225e754db9797e38f349049, type: 2}
   bronzeWheelSprite: {fileID: 21300000, guid: 7b804379905889344ad7d7bdd7508361, type: 3}
   silverWheelSprite: {fileID: 21300000, guid: d7859e8f4fa3bfa4d874ce191b9d736e, type: 3}
   goldWheelSprite: {fileID: 21300000, guid: f3ecdfdbb8a739a42b08c6010118be3c, type: 3}

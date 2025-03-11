@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5142fdc06cb6f42840672016865302, type: 3}
+  m_Name: RewardDataGroupSilver
+  m_EditorClassIdentifier: 
+  specialItemCollection: {fileID: 11400000, guid: eaad47073a53d804dac3b139cda2edc0, type: 2}
+  RewardList:
+  - probability: 17
+    amount: 1
+    rewardType: 0
+    currencyType: 0
+    equipmentPointType: 7
+    chestType: 7
+    specialItemID: -1
+    sprite: {fileID: 21300000, guid: 43a9c3b8aed385d46a2628f86ee1447e, type: 3}
+    previousRewardType: 0
+    previousSpecialID: 0
+  - probability: 8
+    amount: 2
+    rewardType: 2
+    currencyType: 2
+    equipmentPointType: 7
+    chestType: 1
+    specialItemID: -1
+    sprite: {fileID: 21300000, guid: 88f66d1c2d2cc35459434ab8c537fc15, type: 3}
+    previousRewardType: 2
+    previousSpecialID: 0
+  - probability: 17
+    amount: 1000
+    rewardType: 0
+    currencyType: 1
+    equipmentPointType: 7
+    chestType: 7
+    specialItemID: -1
+    sprite: {fileID: 21300000, guid: b9792d135e33fc842a7f303e36341eb7, type: 3}
+    previousRewardType: 0
+    previousSpecialID: 0
+  - probability: 8
+    amount: 1
+    rewardType: 2
+    currencyType: 2
+    equipmentPointType: 7
+    chestType: 3
+    specialItemID: -1
+    sprite: {fileID: 21300000, guid: 12dcb19fd8333c34e8d9af36733f949d, type: 3}
+    previousRewardType: 2
+    previousSpecialID: 0
+  - probability: 17
+    amount: 1
+    rewardType: 1
+    currencyType: 2
+    equipmentPointType: 2
+    chestType: 7
+    specialItemID: -1
+    sprite: {fileID: 21300000, guid: 1c96f9126bdfaf5479968f6a68b70493, type: 3}
+    previousRewardType: 1
+    previousSpecialID: 0
+  - probability: 8
+    amount: 1
+    rewardType: 3
+    currencyType: 2
+    equipmentPointType: 7
+    chestType: 7
+    specialItemID: 6
+    sprite: {fileID: 21300000, guid: 6c76d93db6a54a045979b613c0b51999, type: 3}
+    previousRewardType: 3
+    previousSpecialID: 6
+  - probability: 17
+    amount: 1
+    rewardType: 3
+    currencyType: 2
+    equipmentPointType: 7
+    chestType: 7
+    specialItemID: 7
+    sprite: {fileID: 21300000, guid: 0c461f8f8deedfc488faf3bf2dada5e2, type: 3}
+    previousRewardType: 3
+    previousSpecialID: 7
+  - probability: 8
+    amount: 1
+    rewardType: 3
+    currencyType: 2
+    equipmentPointType: 7
+    chestType: 7
+    specialItemID: 9
+    sprite: {fileID: 21300000, guid: aa2b85fc8b5b84143962c54cde4ab90a, type: 3}
+    previousRewardType: 3
+    previousSpecialID: 9
